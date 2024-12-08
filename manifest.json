@@ -1,20 +1,14 @@
 {
-    "manifest_version": 3,
-    "name": "Auto Form Filler",
-    "version": "1.0",
-    "permissions": ["storage"],
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon": "icon.png"
-    },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
-      }
-    ],
-    "background": {
-      "service_worker": "background.js"
+  "manifest_version": 3,
+  "name": "QuickFiller",
+  "version": "1.0.0",
+  "description": "A Quick Form Filler so that you dont have to repeat yourself",
+  "author": "vaibhavkokare321@gmail.com",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_script.js"]
     }
-  }
-  
+  ]
+}
