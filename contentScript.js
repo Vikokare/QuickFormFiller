@@ -1,5 +1,4 @@
-console.log("Content script loaded");
-
+// console.log("Content script loaded");
 (() => {
     document.querySelectorAll("input[type='submit']").forEach(ele => 
         createFlashBtn(ele)
@@ -19,7 +18,7 @@ function createFlashBtn(ele) {
     flashBtn.style.width = 'auto';
 
     ele.parentElement.appendChild(flashBtn);
-    console.log("Element Added...");
+    // console.log("Element Added...");
 
     flashBtn.addEventListener("click", () => {
         processInputTags(ele.closest("form"));
@@ -28,17 +27,25 @@ function createFlashBtn(ele) {
 
 function processInputTags(formEle) {
     const dictData = {
-        "FirstName": "ABC",
-        "LastName": "XYZ",
-        "Email": "abc@gmail.com",
-        "Company": "IJK",
-        "Country": "1234567890",
+        "first": "ABC",
+        "last": "XYZ",
+        "name": "ABC XYZ",
+        "mail": "abc@gmail.com",
+        "company": "IJK",
+        "phone": "1234567890",
+        "country": "YYY",
+        "address": "XXX",
+        "message": "___",
     }
     const keys = Object.keys(dictData)
 
-    // console.log("---", formEle.className, "---");
-    formEle.querySelectorAll("input[type='text']").forEach(inp => {
-        const inputLabel = inp.placeholder || inp.name || inp.closest("div").textContent.trim()
-        inp.value = dictData[inputLabel]
+    // console.log("--- Click Event Triggired ---");
+    formEle.querySelectorAll("input[type='text'], input[type='email'], input[type='text']:not([type='hidden']), textarea").forEach(inp => {
+        const inputLabel = inp.placeholder.toLowerCase() || inp.name.toLowerCase() || inp.closest("div").textContent.toLowerCase().trim()
+        for (let key of keys) {
+            if (key == inputLabel || inputLabel.includes(key) || key.includes(inputLabel)) {
+                inp.value = dictData[key]
+            }
+        }
     })
 };
